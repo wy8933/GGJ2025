@@ -8,8 +8,10 @@ public class BaseEnemy : MonoBehaviour
     public Transform player;
     public NavMeshAgent agent;
 
+    [Header("Base Stats")]
     public float maxHealth;
     public float health;
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();

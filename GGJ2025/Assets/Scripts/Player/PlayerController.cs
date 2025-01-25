@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
         var bulletController = objectInstance.GetComponent<BulletController>();
 
         if (bulletController) {
-            bulletController.InitBullet();
+            bulletController.InitBullet(pool);
         }
 
         var lifetime = TimeSpan.FromSeconds(1.0f);
@@ -120,6 +120,5 @@ public class PlayerController : MonoBehaviour
     private void Die()
     {
         Debug.Log("Player has died!");
-        // Handle death (respawn, game over screen, etc.)
     }
 }

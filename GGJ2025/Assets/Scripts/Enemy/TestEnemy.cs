@@ -1,17 +1,13 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class TestEnemy : MonoBehaviour
+public class TestEnemy : BaseEnemy
 {
-    public Transform player;
-    public NavMeshAgent agent;
-
     [Header("Attack Settings")]
     public float attackRange = 2f;
     public float attackCooldown = 1.5f;
     public int attackDamage = 10;
-    public DamageType attackDamageType = DamageType.Physical;
-
+    public DamageType attackDamageType = DamageType.None;
     private bool canAttack = true;
 
     private void Start()
@@ -21,16 +17,7 @@ public class TestEnemy : MonoBehaviour
 
     private void Update()
     {
-        EnemyPathFinding();
         TryAttack();
-    }
-
-    protected void EnemyPathFinding()
-    {
-        if (agent != null)
-        {
-            agent.destination = player.position;
-        }
     }
 
     private void TryAttack()
@@ -54,8 +41,6 @@ public class TestEnemy : MonoBehaviour
             DamageInfo damageInfo = new DamageInfo(gameObject, player.gameObject, attackDamage, attackDamageType);
             DamageManager.Instance.ManageDamage(damageInfo);
         }
-
-        Debug.Log($"{gameObject.name} attacked {player.name} for {attackDamage} {attackDamageType} damage!");
 
         Invoke(nameof(ResetAttack), attackCooldown);
     }
