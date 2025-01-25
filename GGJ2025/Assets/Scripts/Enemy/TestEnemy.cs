@@ -7,9 +7,10 @@ public class TestEnemy : MonoBehaviour
     public NavMeshAgent agent;
 
     [Header("Attack Settings")]
-    public float attackRange = 2f; // Distance at which the enemy attacks
-    public float attackCooldown = 1.5f; // Time between attacks
-    public int attackDamage = 10; // Damage dealt per attack
+    public float attackRange = 2f;
+    public float attackCooldown = 1.5f;
+    public int attackDamage = 10;
+    public DamageType attackDamageType = DamageType.Physical;
 
     private bool canAttack = true;
 
@@ -48,9 +49,13 @@ public class TestEnemy : MonoBehaviour
     {
         canAttack = false;
 
-        Debug.Log("Enemy attacks!");
-        
+        if (player.TryGetComponent(out PlayerController playerController))
+        {
+            DamageInfo damageInfo = new DamageInfo(gameObject, player.gameObject, attackDamage, attackDamageType);
+            DamageManager.Instance.ManageDamage(damageInfo); // Process damage through DamageManager
+        }
 
+        Debug.Log($"{gameObject.name} attacked {player.name} for {attackDamage} {attackDamageType} damage!");
 
         Invoke(nameof(ResetAttack), attackCooldown);
     }
