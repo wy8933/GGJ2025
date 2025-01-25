@@ -18,6 +18,9 @@ public class PlayerController : MonoBehaviour
     public Vector2 moveDirection;
     public Vector2 mousePosition;
 
+    [Header("Bubble")]
+    public float maxBubble;
+    public float currentBubble;
 
     [Header("Machine Gun")]
     public bool isShooting;
@@ -33,6 +36,8 @@ public class PlayerController : MonoBehaviour
     {
         _playerRB = GetComponent<Rigidbody>();
         _playerRB.maxLinearVelocity = maxSpeed;
+        HUDManager.Instance.SetHealth(Stats.Health);
+        HUDManager.Instance.SetBubble(currentBubble);
     }
 
     void FixedUpdate()
@@ -111,11 +116,12 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage) {
         Stats.Health -= damage;
-
+        HUDManager.Instance.SetHealth(Stats.Health);
         if (Stats.Health <= 0) {
             Die();
         }
     }
+
     private void Die()
     {
         Debug.Log("Player has died!");
