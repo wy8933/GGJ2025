@@ -85,22 +85,16 @@ public class PlayerController : MonoBehaviour
                 break;
             case WeaponType.Shotgun:
                 for (int i = 0; i < bulletCount; i++) {
-                    StartCoroutine(DelayAction(i / bulletCount)); 
                     SpawnBullet(shotGunAngleOffset);
                 }
                 break;
         }
-    }
-    IEnumerator DelayAction(float delayTime)
-    {
-        yield return new WaitForSeconds(delayTime);
     }
 
     public void SpawnBullet(int offset) {
         Vector3 currentRotation = transform.eulerAngles;
         float randomOffset = Random(offset);
         currentRotation.y += randomOffset;
-        Debug.Log(currentRotation.y);
         Quaternion rotation = Quaternion.Euler(currentRotation);
 
         var (objectInstance, pool) = ObjectPooling.GetOrCreate(bulletPrefab, transform.position, rotation);
