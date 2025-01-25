@@ -11,6 +11,7 @@ public class PlayerInputManager : MonoBehaviour
 
     [Header("Input Action References")]
     [SerializeField] private InputActionReference _moveAction;
+    [SerializeField] private InputActionReference _fireAction;
 
     private void Start()
     {
@@ -21,19 +22,24 @@ public class PlayerInputManager : MonoBehaviour
     private void OnEnable()
     {
         _moveAction.action.Enable();
+        _fireAction.action.Enable();
 
         _moveAction.action.performed += OnMove;
         _moveAction.action.canceled += OnMove;
 
+
+        _fireAction.action.performed += OnAttack;
     }
 
     private void OnDisable()
     {
         _moveAction.action.Disable();
+        _fireAction.action.Disable();
 
         _moveAction.action.performed -= OnMove;
         _moveAction.action.canceled -= OnMove;
 
+        _fireAction.action.performed -= OnAttack;
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -41,6 +47,9 @@ public class PlayerInputManager : MonoBehaviour
         _player.moveDirection = context.ReadValue<Vector2>().normalized;
     }
 
+    private void OnAttack(InputAction.CallbackContext context) {
+        _player.Attack();
+    }
 }
 
 
