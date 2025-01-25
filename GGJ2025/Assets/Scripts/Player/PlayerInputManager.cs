@@ -2,6 +2,7 @@ using ObjectPoolings;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Timeline.DirectorControlPlayable;
 
 [RequireComponent(typeof(PlayerInput), typeof(PlayerController))]
 public class PlayerInputManager : MonoBehaviour
@@ -12,6 +13,7 @@ public class PlayerInputManager : MonoBehaviour
     [Header("Input Action References")]
     [SerializeField] private InputActionReference _moveAction;
     [SerializeField] private InputActionReference _fireAction;
+    [SerializeField] private InputActionReference _pauseAction;
 
     private void Start()
     {
@@ -23,18 +25,22 @@ public class PlayerInputManager : MonoBehaviour
     {
         _moveAction.action.Enable();
         _fireAction.action.Enable();
+        _pauseAction.action.Enable();
 
         _moveAction.action.performed += OnMove;
         _moveAction.action.canceled += OnMove;
 
         _fireAction.action.performed += OnAttackPerformed;
         _fireAction.action.canceled += OnAttackCanceled;
+
+        _pauseAction.action.performed += OnPausePerformed;
     }
 
     private void OnDisable()
     {
         _moveAction.action.Disable();
         _fireAction.action.Disable();
+        _pauseAction.action.Disable();
 
         _moveAction.action.performed -= OnMove;
         _moveAction.action.canceled -= OnMove;
@@ -62,6 +68,10 @@ public class PlayerInputManager : MonoBehaviour
     private void OnAttackCanceled(InputAction.CallbackContext context)
     {
         _player.isShooting = false;
+    }
+
+    private void OnPausePerformed(InputAction.CallbackContext context) { 
+        GameManager.Instance.Pause();
     }
 }
 
