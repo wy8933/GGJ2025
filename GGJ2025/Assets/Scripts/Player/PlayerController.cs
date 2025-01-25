@@ -21,6 +21,8 @@ public class PlayerController : MonoBehaviour
     [Header("Bubble")]
     public float maxBubble;
     public float currentBubble;
+    public float bubbleHealthDeduct;
+    public float bubbleGainAmount;
 
     [Header("Machine Gun")]
     public bool isShooting;
@@ -36,6 +38,8 @@ public class PlayerController : MonoBehaviour
     {
         _playerRB = GetComponent<Rigidbody>();
         _playerRB.maxLinearVelocity = maxSpeed;
+        HUDManager.Instance.SetMaxHealth(Stats.MaxHealth);
+        HUDManager.Instance.SetMaxBubble(maxBubble);
         HUDManager.Instance.SetHealth(Stats.Health);
         HUDManager.Instance.SetBubble(currentBubble);
     }
@@ -48,16 +52,19 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (isShooting) {
+        if (isShooting) 
+        {
             shootshootCooldownTimer -= Time.deltaTime;
-            if (shootshootCooldownTimer < 0) {
+            if (shootshootCooldownTimer < 0) 
+            {
                 Attack();
                 shootshootCooldownTimer += shootCooldown;
             }
         }
     }
 
-    public void PlayerMovement() {
+    public void PlayerMovement() 
+    {
         // Physics doesn't need delta time
         _playerRB.AddForce(new Vector3(moveDirection.x,0,moveDirection.y) * Stats.MovementSpeed);
     }
@@ -82,21 +89,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Attack() {
+    public void Attack() 
+    {
         switch (weaponType)
         {
             case WeaponType.MachineGun:
                 SpawnBullet(machineGunAngleOffset);
                 break;
             case WeaponType.Shotgun:
-                for (int i = 0; i < bulletCount; i++) {
+                for (int i = 0; i < bulletCount; i++) 
+                {
                     SpawnBullet(shotGunAngleOffset);
                 }
                 break;
         }
     }
 
-    public void SpawnBullet(int offset) {
+    public void SpawnBullet(int offset)
+    {
         Vector3 currentRotation = transform.eulerAngles;
         float randomOffset = Random(offset);
         currentRotation.y += randomOffset;
@@ -105,19 +115,24 @@ public class PlayerController : MonoBehaviour
         var (objectInstance, pool) = ObjectPooling.GetOrCreate(bulletPrefab, transform.position, rotation);
         var bulletController = objectInstance.GetComponent<BulletController>();
 
-        if (bulletController) {
+        if (bulletController)
+        {
             bulletController.InitBullet(pool, Stats.AtkMultiplier);
         }
     }
 
-    private float Random(int num) { 
+    private float Random(int num)
+    { 
         return new System.Random().Next(-num,num) - new System.Random().Next(-num, num);
     }
 
-    public void TakeDamage(float damage) {
+    public void TakeDamage(float damage)
+    {
         Stats.Health -= damage;
         HUDManager.Instance.SetHealth(Stats.Health);
-        if (Stats.Health <= 0) {
+
+        if (Stats.Health <= 0)
+        {
             Die();
         }
     }
@@ -125,5 +140,23 @@ public class PlayerController : MonoBehaviour
     private void Die()
     {
         Debug.Log("Player has died!");
+    }
+
+    public void GainBubble(float amount)
+    {
+        currentBubble += amount;
+
+        if (currentBubble > maxBubble)
+        { 
+            currentBubble = maxBubble;
+        }
+
+        Debug.Log(currentBubble);
+        HUDManager.Instance.SetBubble(currentBubble);
+    }
+
+    public void WaterLogic() {
+        TakeDamage(bubbleHealthDeduct);
+        GainBubble(bubbleGainAmount);
     }
 }
