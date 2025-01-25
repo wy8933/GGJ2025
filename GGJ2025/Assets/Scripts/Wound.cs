@@ -2,9 +2,15 @@ using UnityEngine;
 
 public class Wound : MonoBehaviour
 {
+    public static Wound Instance;
+
+    private void Start()
+    {
+        Instance = this;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
         if (other.tag == "Enemy") {
             GameManager.Instance.GameOver();
         }

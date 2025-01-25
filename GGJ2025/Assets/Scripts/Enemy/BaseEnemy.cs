@@ -28,10 +28,22 @@ public class BaseEnemy : MonoBehaviour
     }
 
     protected void EnemyPathFinding() {
-        if (agent != null)
+
+        if (Vector3.Distance(transform.position, player.position) <= Vector3.Distance(transform.position, Wound.Instance.transform.position))
         {
-            agent.destination = player.position;
+            if (agent != null)
+            {
+                agent.destination = player.position;
+            }
         }
+        else 
+        {
+            if (agent != null)
+            {
+                agent.destination = Wound.Instance.transform.position;
+            }
+        }
+        
     }
 
     public void TakeDamage(float damage) {
