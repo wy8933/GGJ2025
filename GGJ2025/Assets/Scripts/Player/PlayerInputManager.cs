@@ -27,8 +27,8 @@ public class PlayerInputManager : MonoBehaviour
         _moveAction.action.performed += OnMove;
         _moveAction.action.canceled += OnMove;
 
-
-        _fireAction.action.performed += OnAttack;
+        _fireAction.action.performed += OnAttackPerformed;
+        _fireAction.action.canceled += OnAttackCanceled;
     }
 
     private void OnDisable()
@@ -39,7 +39,8 @@ public class PlayerInputManager : MonoBehaviour
         _moveAction.action.performed -= OnMove;
         _moveAction.action.canceled -= OnMove;
 
-        _fireAction.action.performed -= OnAttack;
+        _fireAction.action.performed -= OnAttackPerformed;
+        _fireAction.action.canceled -= OnAttackCanceled;
     }
 
     private void OnMove(InputAction.CallbackContext context)
@@ -47,8 +48,14 @@ public class PlayerInputManager : MonoBehaviour
         _player.moveDirection = context.ReadValue<Vector2>().normalized;
     }
 
-    private void OnAttack(InputAction.CallbackContext context) {
+    private void OnAttackPerformed(InputAction.CallbackContext context) {
         _player.Attack();
+        _player.isShooting = true;
+    }
+    private void OnAttackCanceled(InputAction.CallbackContext context)
+    {
+        _player.Attack();
+        _player.isShooting = false;
     }
 }
 

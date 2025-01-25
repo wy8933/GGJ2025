@@ -1,7 +1,8 @@
 using ObjectPoolings;
+using System.Collections;
 using System;
 using UnityEngine;
-using ObjectPoolings;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerController : MonoBehaviour
@@ -12,10 +13,17 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float maxSpeed;
     public float rotationSpeed;
+    public int rotationOffset;
     public Vector2 moveDirection;
     public Vector2 mousePosition;
 
     public GameObject bulletPrefab;
+    public PlayerStats playerStats;
+
+    [Header("Machine Gun")]
+    public bool isShooting;
+    public float shootCooldown;
+    public float shootshootCooldownTimer;
 
     void Start()
     {
@@ -29,6 +37,16 @@ public class PlayerController : MonoBehaviour
         PlayerRotation();
     }
 
+    private void Update()
+    {
+        if (isShooting) {
+            shootshootCooldownTimer -= Time.deltaTime;
+            if (shootshootCooldownTimer < 0) {
+                Attack();
+                shootshootCooldownTimer += shootCooldown;
+            }
+        }
+    }
 
     public void PlayerMovement() {
         // Physics doesn't need delta time
@@ -60,7 +78,20 @@ public class PlayerController : MonoBehaviour
     }
 
     public void SpawnBullet() {
-        var (objectInstance, pool) = ObjectPooling.GetOrCreate(bulletPrefab, transform.position, transform.rotation);
+        Quaternion rotation = transform.rotation;
+
+        switch (playerStats.weaponType) {
+            case WeaponType.MachineGun:
+                Vector3 currentRotation = transform.eulerAngles;
+                currentRotation.y += Random(rotationOffset);
+                rotation = Quaternion.Euler(currentRotation);
+                break;
+            case WeaponType.Shotgun:
+
+                break;
+        }
+
+        var (objectInstance, pool) = ObjectPooling.GetOrCreate(bulletPrefab, transform.position, rotation);
         var bulletController = objectInstance.GetComponent<BulletController>();
 
         if (bulletController) {
@@ -69,5 +100,9 @@ public class PlayerController : MonoBehaviour
 
         var lifetime = TimeSpan.FromSeconds(1.0f);
         (objectInstance, pool).TimedRelease(lifetime);
+    }
+
+    private float Random(int num) { 
+        return new System.Random().Next(-num,num);
     }
 }
