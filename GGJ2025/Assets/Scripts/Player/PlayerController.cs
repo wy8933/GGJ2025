@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     public float speed;
     public float maxSpeed;
     public float rotationSpeed;
-    public int rotationOffset;
     public Vector2 moveDirection;
     public Vector2 mousePosition;
 
@@ -24,6 +23,11 @@ public class PlayerController : MonoBehaviour
     public bool isShooting;
     public float shootCooldown;
     public float shootshootCooldownTimer;
+    public int machineGunAngleOffset;
+
+    [Header("Shot Gun")]
+    public int bulletCount;
+    public int shotGunAngleOffset;
 
     void Start()
     {
@@ -74,22 +78,30 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Attack() {
-        SpawnBullet();
-    }
-
-    public void SpawnBullet() {
-        Quaternion rotation = transform.rotation;
-
-        switch (playerStats.weaponType) {
+        switch (playerStats.weaponType)
+        {
             case WeaponType.MachineGun:
-                Vector3 currentRotation = transform.eulerAngles;
-                currentRotation.y += Random(rotationOffset);
-                rotation = Quaternion.Euler(currentRotation);
+                SpawnBullet(machineGunAngleOffset);
                 break;
             case WeaponType.Shotgun:
-
+                for (int i = 0; i < bulletCount; i++) {
+                    StartCoroutine(DelayAction(i / bulletCount)); 
+                    SpawnBullet(shotGunAngleOffset);
+                }
                 break;
         }
+    }
+    IEnumerator DelayAction(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+    }
+
+    public void SpawnBullet(int offset) {
+        Vector3 currentRotation = transform.eulerAngles;
+        float randomOffset = Random(offset);
+        currentRotation.y += randomOffset;
+        Debug.Log(currentRotation.y);
+        Quaternion rotation = Quaternion.Euler(currentRotation);
 
         var (objectInstance, pool) = ObjectPooling.GetOrCreate(bulletPrefab, transform.position, rotation);
         var bulletController = objectInstance.GetComponent<BulletController>();
@@ -103,6 +115,6 @@ public class PlayerController : MonoBehaviour
     }
 
     private float Random(int num) { 
-        return new System.Random().Next(-num,num);
+        return new System.Random().Next(-num,num) - new System.Random().Next(-num, num);
     }
 }
