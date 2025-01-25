@@ -34,4 +34,8 @@ public class MenuManager : MonoBehaviour
     public void OnExitClicked() {
         Application.Quit();
     }
+
+    public void OnMainMenuClicked() { 
+        SceneManager.LoadScene(0);
+    }
 }
