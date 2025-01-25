@@ -58,4 +58,9 @@ public class BaseEnemy : MonoBehaviour
     {
         pool.Release(gameObject);
     }
+
+    private void BubbleDeathAnimation() { 
+        
+    }
+
 }
