@@ -117,4 +117,9 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damage) {
         Stats.Health -= damage;
     }
+    private void Die()
+    {
+        Debug.Log("Player has died!");
+        // Handle death (respawn, game over screen, etc.)
+    }
 }

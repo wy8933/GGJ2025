@@ -43,7 +43,6 @@ public class DamageManager : MonoBehaviour
             // Deal damage to entity 
             if (damageInfo.target.tag == "Enemy") {
                 var enemy = damageInfo.target.GetComponent<BaseEnemy>();
-                Debug.Log(enemy);
                 if (enemy) { 
                     enemy.health -= damageInfo.damage;
                 }

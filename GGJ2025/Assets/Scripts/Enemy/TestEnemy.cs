@@ -52,7 +52,7 @@ public class TestEnemy : MonoBehaviour
         if (player.TryGetComponent(out PlayerController playerController))
         {
             DamageInfo damageInfo = new DamageInfo(gameObject, player.gameObject, attackDamage, attackDamageType);
-            DamageManager.Instance.ManageDamage(damageInfo); // Process damage through DamageManager
+            DamageManager.Instance.ManageDamage(damageInfo);
         }
 
         Debug.Log($"{gameObject.name} attacked {player.name} for {attackDamage} {attackDamageType} damage!");
