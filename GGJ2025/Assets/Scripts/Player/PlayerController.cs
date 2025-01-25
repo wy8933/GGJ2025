@@ -113,6 +113,10 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage) {
         Stats.Health -= damage;
+
+        if (Stats.Health <= 0) {
+            Die();
+        }
     }
     private void Die()
     {

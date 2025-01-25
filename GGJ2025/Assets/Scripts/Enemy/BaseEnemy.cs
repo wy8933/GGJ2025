@@ -41,7 +41,12 @@ public class BaseEnemy : MonoBehaviour
         health -= damage;
 
         if (health <= 0) {
-            pool.Release(gameObject);
+            Die();
         }
+    }
+
+    private void Die() 
+    {
+        pool.Release(gameObject);
     }
 }

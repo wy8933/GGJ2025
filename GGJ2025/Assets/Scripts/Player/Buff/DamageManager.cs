@@ -54,7 +54,6 @@ public class DamageManager : MonoBehaviour
                 if (player)
                 {
                     player.TakeDamage(damageInfo.damage);
-
                 }
             }
         }
