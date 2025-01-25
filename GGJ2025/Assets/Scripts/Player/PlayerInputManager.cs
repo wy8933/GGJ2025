@@ -49,11 +49,11 @@ public class PlayerInputManager : MonoBehaviour
     }
 
     private void OnAttackPerformed(InputAction.CallbackContext context) {
-        if (_player.playerStats.weaponType == WeaponType.Shotgun)
+        if (_player.weaponType == WeaponType.Shotgun)
         {
             _player.Attack();
         }
-        else if (_player.playerStats.weaponType == WeaponType.MachineGun)
+        else if (_player.weaponType == WeaponType.MachineGun)
         {
             _player.isShooting = true;
         }

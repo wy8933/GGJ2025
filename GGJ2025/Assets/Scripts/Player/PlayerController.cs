@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody _playerRB;
     public Camera mainMamera;
+    public GameObject bulletPrefab;
+    public PlayerStats Stats;
+    public WeaponType weaponType;
+
     [Header("Movement/Rotation")]
     public float speed;
     public float maxSpeed;
@@ -16,8 +20,6 @@ public class PlayerController : MonoBehaviour
     public Vector2 moveDirection;
     public Vector2 mousePosition;
 
-    public GameObject bulletPrefab;
-    public PlayerStats playerStats;
 
     [Header("Machine Gun")]
     public bool isShooting;
@@ -78,7 +80,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void Attack() {
-        switch (playerStats.weaponType)
+        switch (weaponType)
         {
             case WeaponType.MachineGun:
                 SpawnBullet(machineGunAngleOffset);
@@ -110,5 +112,9 @@ public class PlayerController : MonoBehaviour
 
     private float Random(int num) { 
         return new System.Random().Next(-num,num) - new System.Random().Next(-num, num);
+    }
+
+    public void TakeDamage(float damage) {
+        Stats.Health -= damage;
     }
 }

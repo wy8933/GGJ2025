@@ -1,12 +1,35 @@
+using System;
 using UnityEngine;
-
-public enum WeaponType{
+public enum WeaponType
+{
     MachineGun,
     Shotgun
 }
 
 [System.Serializable]
-public class PlayerStats
+public struct PlayerStats
 {
-    public WeaponType weaponType;
+    [Header("Basic Stats")]
+    public float MaxHealth;
+    public float Health;
+    public float MovementSpeed;
+    public float RotationSpeed;
+    public float SprintSpeed;
+    public float Resistance; 
+
+
+    [Header("Defense Stats")]
+    public float Shield;
+    public float DamageReduction;
+    public float BlockChance;
+
+    [Header("Status Effect Mechanics")]
+    public float SlowResistance;
+
+    [Header("Stats Multiplier")]
+    public float AtkMultiplier;
+    public float DamageReductionMultiplier;
+    public float ResistanceMultiplier;
+    public float SpeedMultiplier;
+    public float GoldDropMultiplier;
 }
