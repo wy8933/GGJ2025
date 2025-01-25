@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bulletPrefab;
     public Stats Stats;
     public WeaponType weaponType;
+    public GameObject playerModel;
 
     [Header("Movement/Rotation")]
     public float maxSpeed;
@@ -86,7 +87,7 @@ public class PlayerController : MonoBehaviour
             if (direction != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * Stats.RotationSpeed);
+                playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, targetRotation, Time.deltaTime * Stats.RotationSpeed);
             }
         }
     }
@@ -115,7 +116,7 @@ public class PlayerController : MonoBehaviour
 
     public void SpawnBullet(int offset)
     {
-        Vector3 currentRotation = transform.eulerAngles;
+        Vector3 currentRotation = playerModel.transform.eulerAngles;
         float randomOffset = Random(offset);
         currentRotation.y += randomOffset;
         Quaternion rotation = Quaternion.Euler(currentRotation);
