@@ -12,18 +12,24 @@ public class EnemySpawner : MonoBehaviour
 {
     public EnemyType enemyType = EnemyType.germ1;
     public List<GameObject> enemyPrefabs;
-    float timer;
+
+    [Header("Enemy Time Spawner")]
+    public bool isTimeSpawner;
+    public float spawnTime;
+    float spawnTimer;
 
     private void Update()
     {
-        timer -= Time.deltaTime;
-        if (timer < 0) 
-        { 
-            SpawnEnemy();
-            timer = 5;
+        if (isTimeSpawner) 
+        {
+            spawnTimer -= Time.deltaTime;
+            if (spawnTimer < 0)
+            {
+                SpawnEnemy();
+                spawnTimer = spawnTime;
+            }
         }
     }
-
 
     private void SpawnEnemy() {
         var (objectInstance, enemyPool) = ObjectPooling.GetOrCreate(enemyPrefabs[(int)enemyType], transform.position, transform.rotation, "Enemies");

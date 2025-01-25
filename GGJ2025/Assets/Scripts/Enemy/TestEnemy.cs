@@ -3,6 +3,8 @@ using UnityEngine.AI;
 
 public class TestEnemy : BaseEnemy
 {
+    public Stats Stats;
+
     [Header("Attack Settings")]
     public float attackRange = 2f;
     public float attackCooldown = 1.5f;
@@ -40,7 +42,7 @@ public class TestEnemy : BaseEnemy
 
         if (player.TryGetComponent(out PlayerController playerController))
         {
-            DamageInfo damageInfo = new DamageInfo(gameObject, player.gameObject, attackDamage, attackDamageType);
+            DamageInfo damageInfo = new DamageInfo(gameObject, player.gameObject, attackDamage * Stats.AtkMultiplier, attackDamageType);
             DamageManager.Instance.ManageDamage(damageInfo);
         }
 

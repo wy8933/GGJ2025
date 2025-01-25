@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody _playerRB;
     public Camera mainMamera;
     public GameObject bulletPrefab;
-    public PlayerStats Stats;
+    public Stats Stats;
     public WeaponType weaponType;
 
     [Header("Movement/Rotation")]
@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
         var bulletController = objectInstance.GetComponent<BulletController>();
 
         if (bulletController) {
-            bulletController.InitBullet(pool);
+            bulletController.InitBullet(pool, Stats.AtkMultiplier);
         }
     }
 

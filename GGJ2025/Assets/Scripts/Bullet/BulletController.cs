@@ -6,7 +6,8 @@ public class BulletController : MonoBehaviour
 {
     public int minSpeed;
     public int maxSpeed; 
-    public float damage = 10f;
+    public float baseDamage = 10f;
+    private float _damage;
     public float lifeTime;
     public float lifeTimer;
     private bool isReleased = false;
@@ -24,7 +25,8 @@ public class BulletController : MonoBehaviour
     }
 
 
-    public void InitBullet(PrefabPool pool) {
+    public void InitBullet(PrefabPool pool, float damageMult) {
+        _damage = baseDamage * damageMult;
         lifeTimer = lifeTime;
         isReleased = false;
         this.pool = pool;
@@ -37,7 +39,7 @@ public class BulletController : MonoBehaviour
         {
             if (other.TryGetComponent(out BaseEnemy enemy))
             {
-                DamageInfo damageInfo = new DamageInfo(gameObject, other.gameObject, damage, damageType);
+                DamageInfo damageInfo = new DamageInfo(gameObject, other.gameObject, _damage, damageType);
                 DamageManager.Instance.ManageDamage(damageInfo);
             }
 

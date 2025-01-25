@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "ModifyStatsBuffModule", menuName = "BuffSystem/ModifyStatsBuffModule")]
 public class ModifyStatsBuffModule : BaseBuffModule
 {
-    public PlayerStats stats;
+    public Stats stats;
 
     public override void Apply(BuffInfo buffInfo, DamageInfo damageInfo = null)
     {

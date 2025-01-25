@@ -980,6 +980,8 @@ MonoBehaviour:
   enemyType: 0
   enemyPrefabs:
   - {fileID: 5826710366155324046, guid: 0a4b0c8a1c6fb2a459e74bc6f43a6a1a, type: 3}
+  isTimeSpawner: 1
+  spawnTime: 1
 --- !u!4 &1815618633
 Transform:
   m_ObjectHideFlags: 0
