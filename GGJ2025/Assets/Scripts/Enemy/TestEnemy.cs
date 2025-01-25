@@ -13,10 +13,12 @@ public class TestEnemy : BaseEnemy
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Update()
     {
+        EnemyPathFinding();
         TryAttack();
     }
 

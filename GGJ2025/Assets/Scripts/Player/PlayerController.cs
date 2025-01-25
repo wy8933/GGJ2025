@@ -105,9 +105,6 @@ public class PlayerController : MonoBehaviour
         if (bulletController) {
             bulletController.InitBullet(pool);
         }
-
-        var lifetime = TimeSpan.FromSeconds(1.0f);
-        (objectInstance, pool).TimedRelease(lifetime);
     }
 
     private float Random(int num) { 

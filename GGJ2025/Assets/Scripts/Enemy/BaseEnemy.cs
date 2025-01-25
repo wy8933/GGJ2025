@@ -1,3 +1,4 @@
+using ObjectPoolings;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering.Universal;
@@ -7,6 +8,7 @@ public class BaseEnemy : MonoBehaviour
 {
     public Transform player;
     public NavMeshAgent agent;
+    public PrefabPool pool;
 
     [Header("Base Stats")]
     public float maxHealth;
@@ -22,10 +24,24 @@ public class BaseEnemy : MonoBehaviour
         EnemyPathFinding();
     }
 
+    public void InitEnemy(PrefabPool pool) 
+    {
+        health = maxHealth;
+        this.pool = pool;
+    }
+
     protected void EnemyPathFinding() {
         if (agent != null)
         {
             agent.destination = player.position;
+        }
+    }
+
+    public void TakeDamage(float damage) { 
+        health -= damage;
+
+        if (health <= 0) {
+            pool.Release(gameObject);
         }
     }
 }
