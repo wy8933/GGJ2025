@@ -6,13 +6,10 @@ using UnityEngine.Rendering.Universal;
 [RequireComponent(typeof(NavMeshAgent))]
 public class BaseEnemy : MonoBehaviour
 {
+    public Stats Stats;
     public Transform player;
     public NavMeshAgent agent;
     public PrefabPool pool;
-
-    [Header("Base Stats")]
-    public float maxHealth;
-    public float health;
 
     private void Start()
     {
@@ -26,7 +23,7 @@ public class BaseEnemy : MonoBehaviour
 
     public void InitEnemy(PrefabPool pool) 
     {
-        health = maxHealth;
+        Stats.Health = Stats.MaxHealth;
         this.pool = pool;
     }
 
@@ -37,10 +34,10 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage) { 
-        health -= damage;
+    public void TakeDamage(float damage) {
+        Stats.Health -= damage;
 
-        if (health <= 0) {
+        if (Stats.Health <= 0) {
             Die();
         }
     }

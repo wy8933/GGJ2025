@@ -14,9 +14,7 @@ public class PlayerController : MonoBehaviour
     public WeaponType weaponType;
 
     [Header("Movement/Rotation")]
-    public float speed;
     public float maxSpeed;
-    public float rotationSpeed;
     public Vector2 moveDirection;
     public Vector2 mousePosition;
 
@@ -56,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerMovement() {
         // Physics doesn't need delta time
-        _playerRB.AddForce(new Vector3(moveDirection.x,0,moveDirection.y) * speed);
+        _playerRB.AddForce(new Vector3(moveDirection.x,0,moveDirection.y) * Stats.MovementSpeed);
     }
 
     public void PlayerRotation()
@@ -74,7 +72,7 @@ public class PlayerController : MonoBehaviour
             if (direction != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * Stats.RotationSpeed);
             }
         }
     }

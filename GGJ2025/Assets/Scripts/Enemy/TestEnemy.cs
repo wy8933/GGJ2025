@@ -3,8 +3,6 @@ using UnityEngine.AI;
 
 public class TestEnemy : BaseEnemy
 {
-    public Stats Stats;
-
     [Header("Attack Settings")]
     public float attackRange = 2f;
     public float attackCooldown = 1.5f;
