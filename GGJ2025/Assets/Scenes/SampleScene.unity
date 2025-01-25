@@ -573,6 +573,9 @@ MonoBehaviour:
   bulletPrefab: {fileID: 5519319705996490553, guid: 3130233f0e7fd8a438c9e4c240bd0989, type: 3}
   playerStats:
     weaponType: 0
+  isShooting: 0
+  shootCooldown: 0.1
+  shootshootCooldownTimer: 0
 --- !u!54 &1595879608
 Rigidbody:
   m_ObjectHideFlags: 0
