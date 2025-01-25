@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2224385128227821915}
   - component: {fileID: 7149564117463754011}
   - component: {fileID: 4190898646782112386}
+  - component: {fileID: 6141349244940772394}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
@@ -145,10 +146,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f80e01cec9963e841afe3667f40f2b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  agent: {fileID: 0}
-  maxHealth: 100
-  health: 100
   Stats:
     MaxHealth: 100
     Health: 100
@@ -165,6 +162,8 @@ MonoBehaviour:
     ResistanceMultiplier: 1
     SpeedMultiplier: 1
     GoldDropMultiplier: 1
+  player: {fileID: 0}
+  agent: {fileID: 0}
   attackRange: 2
   attackCooldown: 1.5
   attackDamage: 10
@@ -182,3 +181,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffListInspector: []
+--- !u!54 &6141349244940772394
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5826710366155324046}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
