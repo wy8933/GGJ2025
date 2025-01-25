@@ -25,12 +25,14 @@ public class PlayerController : MonoBehaviour
     public float bubbleGainAmount;
 
     [Header("Machine Gun")]
+    public float machineGunBubbleCost;
     public bool isShooting;
     public float shootCooldown;
     public float shootshootCooldownTimer;
     public int machineGunAngleOffset;
 
     [Header("Shot Gun")]
+    public float shotGunBubbleCost;
     public int bulletCount;
     public int shotGunAngleOffset;
 
@@ -94,12 +96,18 @@ public class PlayerController : MonoBehaviour
         switch (weaponType)
         {
             case WeaponType.MachineGun:
-                SpawnBullet(machineGunAngleOffset);
+                if (currentBubble >= machineGunBubbleCost) {
+                    SpawnBullet(machineGunAngleOffset);
+                    ReduceBubble(machineGunBubbleCost);
+                }
                 break;
             case WeaponType.Shotgun:
-                for (int i = 0; i < bulletCount; i++) 
-                {
-                    SpawnBullet(shotGunAngleOffset);
+                if (currentBubble >= shotGunBubbleCost) {
+                    for (int i = 0; i < bulletCount; i++)
+                    {
+                        SpawnBullet(shotGunAngleOffset);
+                    }
+                    ReduceBubble(shotGunBubbleCost);
                 }
                 break;
         }
@@ -150,8 +158,18 @@ public class PlayerController : MonoBehaviour
         { 
             currentBubble = maxBubble;
         }
+        HUDManager.Instance.SetBubble(currentBubble);
+    }
 
-        Debug.Log(currentBubble);
+    public void ReduceBubble(float amount)
+    {
+        currentBubble -= amount;
+
+        if (currentBubble < 0)
+        {
+            currentBubble = 0;
+        }
+
         HUDManager.Instance.SetBubble(currentBubble);
     }
 

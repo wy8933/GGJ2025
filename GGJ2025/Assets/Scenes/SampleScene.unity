@@ -1112,13 +1112,15 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0}
   mousePosition: {x: 0, y: 0}
   maxBubble: 100
-  currentBubble: 5
+  currentBubble: 50
   bubbleHealthDeduct: 5
   bubbleGainAmount: 5
+  machineGunBubbleCost: 0.1
   isShooting: 0
   shootCooldown: 0.1
   shootshootCooldownTimer: 0
   machineGunAngleOffset: 15
+  shotGunBubbleCost: 1
   bulletCount: 7
   shotGunAngleOffset: 10
 --- !u!54 &1595879608
