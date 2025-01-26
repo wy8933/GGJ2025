@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5826710366155324046
+--- !u!1 &7319691533758377645
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,28 +8,28 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1649356869684802951}
-  - component: {fileID: 2310742557562057946}
-  - component: {fileID: 8448571815145643488}
-  - component: {fileID: 493374850777501237}
-  - component: {fileID: 2224385128227821915}
-  - component: {fileID: 7149564117463754011}
-  - component: {fileID: 4190898646782112386}
-  - component: {fileID: 6141349244940772394}
+  - component: {fileID: 1815867915906225566}
+  - component: {fileID: 7308405935636322620}
+  - component: {fileID: 1212598354021996070}
+  - component: {fileID: 4772458217067802740}
+  - component: {fileID: 5603197288393995463}
+  - component: {fileID: 3921575932643103201}
+  - component: {fileID: 5873544615093617294}
+  - component: {fileID: 1499626214756647865}
   m_Layer: 7
-  m_Name: Enemy
+  m_Name: Boss Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1649356869684802951
+--- !u!4 &1815867915906225566
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5826710366155324046}
+  m_GameObject: {fileID: 7319691533758377645}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.04, y: 0.1498847, z: -1.8027387}
@@ -38,21 +38,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2310742557562057946
+--- !u!33 &7308405935636322620
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5826710366155324046}
+  m_GameObject: {fileID: 7319691533758377645}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8448571815145643488
+--- !u!23 &1212598354021996070
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5826710366155324046}
+  m_GameObject: {fileID: 7319691533758377645}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -91,13 +91,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &493374850777501237
+--- !u!65 &4772458217067802740
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5826710366155324046}
+  m_GameObject: {fileID: 7319691533758377645}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -112,13 +112,13 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!195 &2224385128227821915
+--- !u!195 &5603197288393995463
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5826710366155324046}
+  m_GameObject: {fileID: 7319691533758377645}
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
@@ -134,62 +134,26 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7149564117463754011
+--- !u!114 &3921575932643103201
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5826710366155324046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f80e01cec9963e841afe3667f40f2b9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Stats:
-    MaxHealth: 100
-    Health: 100
-    MovementSpeed: 3.5
-    RotationSpeed: 120
-    SprintSpeed: 0
-    Resistance: 0
-    Shield: 0
-    DamageReduction: 0
-    BlockChance: 0
-    SlowResistance: 0
-    SizeMultiplier: 1
-    HealthMultiplier: 1
-    AtkMultiplier: 1
-    DamageReductionMultiplier: 1
-    ResistanceMultiplier: 1
-    SpeedMultiplier: 1
-    GoldDropMultiplier: 1
-  player: {fileID: 0}
-  agent: {fileID: 0}
-  attackRange: 2
-  attackCooldown: 1.5
-  attackDamage: 10
-  attackDamageType: 0
---- !u!114 &4190898646782112386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5826710366155324046}
+  m_GameObject: {fileID: 7319691533758377645}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7ff29b8ab937e494db6a3fe47ddccd4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buffListInspector: []
---- !u!54 &6141349244940772394
+--- !u!54 &5873544615093617294
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5826710366155324046}
+  m_GameObject: {fileID: 7319691533758377645}
   serializedVersion: 4
   m_Mass: 1
   m_Drag: 0
@@ -210,3 +174,41 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1499626214756647865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7319691533758377645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 768e509bcdb024a4896a3f53e10331cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Stats:
+    MaxHealth: 100
+    Health: 100
+    MovementSpeed: 10
+    RotationSpeed: 0
+    SprintSpeed: 0
+    Resistance: 0
+    Shield: 0
+    DamageReduction: 0
+    BlockChance: 0
+    SlowResistance: 0
+    SizeMultiplier: 0
+    HealthMultiplier: 0
+    AtkMultiplier: 0
+    DamageReductionMultiplier: 0
+    ResistanceMultiplier: 0
+    SpeedMultiplier: 0
+    GoldDropMultiplier: 0
+  player: {fileID: 0}
+  agent: {fileID: 0}
+  attackRange: 2
+  attackCooldown: 1.5
+  attackDamage: 10
+  attackDamageType: 0
+  healthMult: 2
+  speedMult: 2
