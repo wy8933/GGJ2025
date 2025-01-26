@@ -149,7 +149,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        //GameManager.Instance.GameOver();
+        GameManager.Instance.GameOver();
     }
 
     public void GainBubble(float amount)

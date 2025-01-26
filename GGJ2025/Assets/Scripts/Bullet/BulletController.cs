@@ -22,6 +22,7 @@ public class BulletController : MonoBehaviour
         if (lifeTimer < 0 &&!isReleased)
         {
             animator.SetBool("IsExplode", true);
+            GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
         }
         CheckBubblePop();
     }
@@ -46,6 +47,7 @@ public class BulletController : MonoBehaviour
             if (!isReleased)
             {
                 animator.SetBool("IsExplode", true);
+                GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
             }
         }
         else if (other.CompareTag("Wall")) 
@@ -53,12 +55,13 @@ public class BulletController : MonoBehaviour
             if (!isReleased)
             {
                 animator.SetBool("IsExplode", true);
+                GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
             }
         }
     }
 
     public void CheckBubblePop() {
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("BubbleExplosion")) {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("BubbleExplosion")&&animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= animator.GetCurrentAnimatorStateInfo(0).length) {
             pool.Release(gameObject);
             isReleased = true;
         }
