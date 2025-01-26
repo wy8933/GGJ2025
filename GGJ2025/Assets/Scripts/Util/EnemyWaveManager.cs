@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 [System.Serializable]
 public class Wave
@@ -16,6 +17,7 @@ public class Wave
 public class EnemyWaveManager : MonoBehaviour
 {
     public static EnemyWaveManager Instance;
+    public PowerUpManager powerUpManager;
 
     [Header("Wave Settings")]
     public List<Wave> waves;
@@ -57,7 +59,12 @@ public class EnemyWaveManager : MonoBehaviour
     {
         if (currentWaveIndex >= waves.Count)
         {
-            Debug.Log("All waves completed!");
+            currentWaveIndex = 0;
+            for (int i = 0; i < waves.Count; i++)
+            {
+                waves[i].baseEnemyCount += 1;
+            }
+
             return;
         }
 
@@ -100,7 +107,10 @@ public class EnemyWaveManager : MonoBehaviour
         {
             yield return null;
         }
-
+        
+        if (waves[currentWaveIndex].isBuffWave) {
+            powerUpManager.ShowPowerUpSelection();
+        }
         yield return new WaitForSeconds(timeBetweenWaves);
         currentWaveIndex++;
         StartNextWave();

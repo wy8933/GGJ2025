@@ -73,6 +73,7 @@ public class PowerUpManager : MonoBehaviour
         }
 
         _powerUpPanel.SetActive(true);
+        GameManager.Instance.isPowerUp = true;
         GameManager.Instance.Pause();
     }
 
@@ -109,5 +110,6 @@ public class PowerUpManager : MonoBehaviour
 
         _powerUpPanel.SetActive(false);
         GameManager.Instance.Pause();
+        GameManager.Instance.isPowerUp = false;
     }
 }

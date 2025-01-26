@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public bool isPaused = false;
     public GameObject pauseMenu;
     public bool isGameOver;
+    public bool isPowerUp;
 
     void Awake()
     {
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             isGameOver = false;
+            isPowerUp = false;
         }
         else { 
             Destroy(gameObject);
@@ -27,13 +29,13 @@ public class GameManager : MonoBehaviour
         if (isPaused)
         {
             Time.timeScale = 0;
-            if(!isGameOver)
+            if(!isGameOver&&!isPowerUp)
                 pauseMenu.SetActive(true);
         }
         else 
         { 
             Time.timeScale = 1; 
-            if(!isGameOver)
+            if(!isGameOver && !isPowerUp)
                 pauseMenu.SetActive(false);
         }
     }
