@@ -267,6 +267,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   isReleased: 0
   audioSource: {fileID: 9203067772447950622}
+  animator: {fileID: 1596602669358748483}
   attackRange: 2
   attackCooldown: 1.5
   attackDamage: 10

@@ -38,6 +38,7 @@ public class BasicEnemy : BaseEnemy
 
     private void Attack()
     {
+        animator.SetBool("IsAttack", true);
         canAttack = false;
 
         if (player.TryGetComponent(out PlayerController playerController))

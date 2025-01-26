@@ -14,6 +14,7 @@ public class BaseEnemy : MonoBehaviour
     public PrefabPool pool;
     public bool isReleased;
     public AudioSource audioSource;
+    public Animator animator;
 
     private void Start()
     {
@@ -23,6 +24,11 @@ public class BaseEnemy : MonoBehaviour
     private void Update()
     {
         EnemyPathFinding();
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|ArmatureAction 0") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= animator.GetCurrentAnimatorStateInfo(0).length)
+        {
+            animator.SetBool("IsAttack", false);
+        }
     }
 
     public void InitEnemy(PrefabPool pool) 
