@@ -3086,21 +3086,21 @@ MonoBehaviour:
   waves:
   - waveName: Wave 1
     baseEnemyCount: 10
-    spawnInterval: 0.5
+    spawnInterval: 0.4
     enemyTypes: 00000000
     isBossWave: 0
     bossType: 1
     isBuffWave: 1
   - waveName: Wave 2
     baseEnemyCount: 11
-    spawnInterval: 0.5
+    spawnInterval: 0.4
     enemyTypes: 00000000
     isBossWave: 0
     bossType: 1
     isBuffWave: 0
   - waveName: Wave 3
     baseEnemyCount: 12
-    spawnInterval: 0.5
+    spawnInterval: 0.4
     enemyTypes: 00000000
     isBossWave: 0
     bossType: 1

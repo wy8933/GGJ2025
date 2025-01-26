@@ -64,8 +64,6 @@ public class EnemyWaveManager : MonoBehaviour
             {
                 waves[i].baseEnemyCount += 1;
             }
-
-            return;
         }
 
         Wave currentWave = waves[currentWaveIndex];
