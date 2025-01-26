@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 mousePosition;
 
     [Header("Bubble")]
+    public Transform firepoint;
     public float maxBubble;
     public float currentBubble;
     public float bubbleHealthDeduct;
@@ -86,7 +87,7 @@ public class PlayerController : MonoBehaviour
 
             if (direction != Vector3.zero)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                Quaternion targetRotation = Quaternion.LookRotation(-direction);
                 playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, targetRotation, Time.deltaTime * Stats.RotationSpeed);
             }
         }
@@ -118,10 +119,10 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 currentRotation = playerModel.transform.eulerAngles;
         float randomOffset = Random(offset);
-        currentRotation.y += randomOffset;
+        currentRotation.y += randomOffset + 180;
         Quaternion rotation = Quaternion.Euler(currentRotation);
 
-        var (objectInstance, pool) = ObjectPooling.GetOrCreate(bulletPrefab, transform.position, rotation);
+        var (objectInstance, pool) = ObjectPooling.GetOrCreate(bulletPrefab, firepoint.position, rotation);
         var bulletController = objectInstance.GetComponent<BulletController>();
 
         if (bulletController)
@@ -148,7 +149,7 @@ public class PlayerController : MonoBehaviour
 
     private void Die()
     {
-        //GameManager.Instance.GameOver();
+        GameManager.Instance.GameOver();
     }
 
     public void GainBubble(float amount)
