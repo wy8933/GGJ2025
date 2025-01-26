@@ -10,6 +10,8 @@ public class PlayerInputManager : MonoBehaviour
     [SerializeField] private PlayerController _player;
     public PlayerInput playerInput;
 
+    public Animator playerAnimator;
+
     [Header("Input Action References")]
     [SerializeField] private InputActionReference _moveAction;
     [SerializeField] private InputActionReference _fireAction;
@@ -27,8 +29,8 @@ public class PlayerInputManager : MonoBehaviour
         _fireAction.action.Enable();
         _pauseAction.action.Enable();
 
-        _moveAction.action.performed += OnMove;
-        _moveAction.action.canceled += OnMove;
+        _moveAction.action.performed += OnMovePerformed;
+        _moveAction.action.canceled += OnMoveCanceled;
 
         _fireAction.action.performed += OnAttackPerformed;
         _fireAction.action.canceled += OnAttackCanceled;
@@ -42,16 +44,23 @@ public class PlayerInputManager : MonoBehaviour
         _fireAction.action.Disable();
         _pauseAction.action.Disable();
 
-        _moveAction.action.performed -= OnMove;
-        _moveAction.action.canceled -= OnMove;
+        _moveAction.action.performed -= OnMovePerformed;
+        _moveAction.action.canceled -= OnMoveCanceled;
 
         _fireAction.action.performed -= OnAttackPerformed;
         _fireAction.action.canceled -= OnAttackCanceled;
     }
 
-    private void OnMove(InputAction.CallbackContext context)
+    private void OnMovePerformed(InputAction.CallbackContext context)
     {
         _player.moveDirection = context.ReadValue<Vector2>().normalized;
+        playerAnimator.SetBool("IsWalking", true);
+    }
+
+    private void OnMoveCanceled(InputAction.CallbackContext context)
+    {
+        _player.moveDirection = context.ReadValue<Vector2>().normalized;
+        playerAnimator.SetBool("IsWalking", false);
     }
 
     private void OnAttackPerformed(InputAction.CallbackContext context) {
