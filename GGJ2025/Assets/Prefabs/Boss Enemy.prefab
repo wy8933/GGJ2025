@@ -189,7 +189,7 @@ MonoBehaviour:
   Stats:
     MaxHealth: 100
     Health: 100
-    MovementSpeed: 10
+    MovementSpeed: 3.5
     RotationSpeed: 0
     SprintSpeed: 0
     Resistance: 0
