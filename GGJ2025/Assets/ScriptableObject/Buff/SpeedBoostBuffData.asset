@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1002
   buffName: Speed Boost
-  description: 
+  description: Speed Boost
   icon: {fileID: 0}
-  maxStack: 0
+  maxStack: 10
   priority: 0
   tags: []
-  isForever: 0
+  isForever: 1
   duration: 0
   tickTime: 0
   buffUpdateType: 0
-  buffRemoveStackType: 0
+  buffRemoveStackType: 1
   OnCreate: {fileID: 11400000, guid: 22bcba18c907bca40868ea0b432810d2, type: 2}
   OnRemove: {fileID: 0}
   OnTick: {fileID: 0}

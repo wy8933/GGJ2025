@@ -10,6 +10,7 @@ public class Wave
     public EnemyType[] enemyTypes;
     public bool isBossWave;
     public EnemyType bossType;
+    public bool isBuffWave;
 }
 
 public class EnemyWaveManager : MonoBehaviour
