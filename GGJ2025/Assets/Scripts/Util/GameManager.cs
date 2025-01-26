@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
-
     public void Pause()
     {
         isPaused = !isPaused;
@@ -27,4 +26,8 @@ public class GameManager : MonoBehaviour
         Pause();
         gameOverMenu.SetActive(true);
     }
+
+
+
+
 }
