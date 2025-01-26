@@ -3093,20 +3093,6 @@ MonoBehaviour:
     isBossWave: 0
     bossType: 1
     isBuffWave: 0
-  - waveName: Wave 4
-    baseEnemyCount: 13
-    spawnInterval: 0.5
-    enemyTypes: 00000000
-    isBossWave: 0
-    bossType: 1
-    isBuffWave: 0
-  - waveName: Wave 5
-    baseEnemyCount: 14
-    spawnInterval: 0.5
-    enemyTypes: 00000000
-    isBossWave: 0
-    bossType: 1
-    isBuffWave: 0
   currentWaveIndex: 0
   enemyIncreaseFactor: 1.1
   timeBetweenWaves: 5
