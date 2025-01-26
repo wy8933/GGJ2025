@@ -2190,7 +2190,7 @@ Canvas:
   m_GameObject: {fileID: 881489421}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 330585545}
   m_PlaneDistance: 1
   m_PixelPerfect: 0
@@ -2896,6 +2896,7 @@ GameObject:
   - component: {fileID: 1483653856}
   - component: {fileID: 1483653857}
   - component: {fileID: 1483653858}
+  - component: {fileID: 1483653859}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2970,6 +2971,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebf5649101b57de43a6bfa33620d88b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1483653859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1483653853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b38c927e88a894c80a08cceff83ce7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waves:
+  - waveName: Wave 1
+    baseEnemyCount: 10
+    spawnInterval: 0.5
+    enemyTypes: 00000000
+    isBossWave: 0
+    bossType: 0
+  - waveName: Wave 2
+    baseEnemyCount: 10
+    spawnInterval: 0.5
+    enemyTypes: 00000000
+    isBossWave: 0
+    bossType: 0
+  - waveName: Wave 3
+    baseEnemyCount: 10
+    spawnInterval: 0.5
+    enemyTypes: 00000000
+    isBossWave: 0
+    bossType: 0
+  enemyIncreaseFactor: 1.1
+  timeBetweenWaves: 5
+  enemySpawners:
+  - {fileID: 1815618632}
 --- !u!1 &1509833901
 GameObject:
   m_ObjectHideFlags: 0
@@ -3770,7 +3806,7 @@ MonoBehaviour:
   enemyType: 0
   enemyPrefabs:
   - {fileID: 5826710366155324046, guid: 0a4b0c8a1c6fb2a459e74bc6f43a6a1a, type: 3}
-  isTimeSpawner: 1
+  isTimeSpawner: 0
   spawnTime: 1
 --- !u!4 &1815618633
 Transform:

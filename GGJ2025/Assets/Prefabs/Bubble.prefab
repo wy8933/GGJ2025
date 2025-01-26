@@ -77,7 +77,7 @@ MonoBehaviour:
   animator: {fileID: 2037945613165406572}
   minSpeed: 10
   maxSpeed: 15
-  baseDamage: 10
+  baseDamage: 50
   lifeTime: 1
   lifeTimer: 0
   damageType: 0

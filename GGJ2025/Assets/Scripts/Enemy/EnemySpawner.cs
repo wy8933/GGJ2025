@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
     [Header("Enemy Time Spawner")]
     public bool isTimeSpawner;
     public float spawnTime;
-    float spawnTimer;
+    private float spawnTimer;
 
     private void Update()
     {
@@ -31,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void SpawnEnemy() {
+    public void SpawnEnemy() {
         var (objectInstance, enemyPool) = ObjectPooling.GetOrCreate(enemyPrefabs[(int)enemyType], transform.position, transform.rotation, "Enemies");
         objectInstance.GetComponent<BaseEnemy>().InitEnemy(enemyPool);
     }
