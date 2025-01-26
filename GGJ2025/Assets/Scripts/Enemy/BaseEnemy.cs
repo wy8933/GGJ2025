@@ -25,9 +25,11 @@ public class BaseEnemy : MonoBehaviour
     {
         Stats.Health = Stats.MaxHealth;
         this.pool = pool;
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = Stats.MovementSpeed;
     }
 
-    protected void EnemyPathFinding() {
+    protected virtual void EnemyPathFinding() {
 
         if (Vector3.Distance(transform.position, player.position) <= Vector3.Distance(transform.position, Wound.Instance.transform.position))
         {
@@ -58,4 +60,9 @@ public class BaseEnemy : MonoBehaviour
     {
         pool.Release(gameObject);
     }
+
+    private void BubbleDeathAnimation() { 
+        
+    }
+
 }

@@ -1,7 +1,9 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using ObjectPoolings;
 
-public class TestEnemy : BaseEnemy
+public class BasicEnemy : BaseEnemy
 {
     [Header("Attack Settings")]
     public float attackRange = 2f;
@@ -22,7 +24,7 @@ public class TestEnemy : BaseEnemy
         TryAttack();
     }
 
-    private void TryAttack()
+    protected void TryAttack()
     {
         if (player == null) return;
 
@@ -46,7 +48,6 @@ public class TestEnemy : BaseEnemy
 
         Invoke(nameof(ResetAttack), attackCooldown);
     }
-
 
     private void ResetAttack()
     {

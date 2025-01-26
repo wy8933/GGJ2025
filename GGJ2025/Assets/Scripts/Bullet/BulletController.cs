@@ -24,7 +24,6 @@ public class BulletController : MonoBehaviour
         }
     }
 
-
     public void InitBullet(PrefabPool pool, float damageMult) {
         _damage = baseDamage * damageMult;
         lifeTimer = lifeTime;

@@ -17,7 +17,6 @@ public struct Stats
     public float SprintSpeed;
     public float Resistance; 
 
-
     [Header("Defense Stats")]
     public float Shield;
     public float DamageReduction;
@@ -27,6 +26,8 @@ public struct Stats
     public float SlowResistance;
 
     [Header("Stats Multiplier")]
+    public float SizeMultiplier;
+    public float HealthMultiplier;
     public float AtkMultiplier;
     public float DamageReductionMultiplier;
     public float ResistanceMultiplier;
