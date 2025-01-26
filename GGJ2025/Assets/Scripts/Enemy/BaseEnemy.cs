@@ -1,4 +1,5 @@
 using ObjectPoolings;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Rendering.Universal;
@@ -29,6 +30,7 @@ public class BaseEnemy : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.speed = Stats.MovementSpeed;
         isReleased = false;
+        ApplyScaling(EnemyWaveManager.Instance.enemyIncreaseFactor, EnemyWaveManager.Instance.currentWaveIndex);
     }
 
     protected virtual void EnemyPathFinding()
@@ -72,13 +74,23 @@ public class BaseEnemy : MonoBehaviour
     private void BubbleDeathAnimation() { 
         
     }
-    private void OnDrawGizmos()
+
+    public void ApplyScaling(float enemyIncreaseFactor, int waveNumber)
     {
-        if (agent != null)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, agent.destination);
-        }
+        float scalingFactor = Mathf.Pow(enemyIncreaseFactor, waveNumber);
+
+        Stats.MaxHealth *= scalingFactor * Stats.HealthMultiplier;
+        Stats.Health = Stats.MaxHealth;
+        Stats.MovementSpeed *= scalingFactor * Stats.SpeedMultiplier;
+        Stats.RotationSpeed *= scalingFactor * Stats.SpeedMultiplier;
+        Stats.SprintSpeed *= scalingFactor * Stats.SpeedMultiplier;
+        Stats.Resistance *= scalingFactor * Stats.ResistanceMultiplier;
+        Stats.Shield *= scalingFactor * Stats.DamageReductionMultiplier;
+        Stats.DamageReduction *= scalingFactor * Stats.DamageReductionMultiplier;
+        Stats.BlockChance *= scalingFactor;
+        Stats.SlowResistance *= scalingFactor;
+
+        Debug.Log($"[Scaling Applied] Wave: {waveNumber}, Factor: {scalingFactor}");
     }
 
 }

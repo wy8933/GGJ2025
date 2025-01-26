@@ -18,8 +18,8 @@ public class EnemyWaveManager : MonoBehaviour
 
     [Header("Wave Settings")]
     public List<Wave> waves;
-    private int currentWaveIndex = 0;
-    private bool isWaveActive = false;
+    public int currentWaveIndex = 0;
+    private bool _isWaveActive = false;
 
     [Header("Scaling Difficulty")]
     public float enemyIncreaseFactor = 1.2f;
@@ -30,8 +30,8 @@ public class EnemyWaveManager : MonoBehaviour
     [Header("Spawner Settings")]
     public List<EnemySpawner> enemySpawners;
 
-    private int enemiesRemainingToSpawn;
-    private int enemiesRemainingAlive;
+    private int _enemiesRemainingToSpawn;
+    private int _enemiesRemainingAlive;
 
     public delegate void OnWaveStart(int waveIndex);
     public event OnWaveStart WaveStarted;
@@ -63,10 +63,10 @@ public class EnemyWaveManager : MonoBehaviour
         Wave currentWave = waves[currentWaveIndex];
 
         int scaledEnemyCount = Mathf.RoundToInt(currentWave.baseEnemyCount * Mathf.Pow(enemyIncreaseFactor, currentWaveIndex));
-        enemiesRemainingToSpawn = scaledEnemyCount;
-        enemiesRemainingAlive = enemiesRemainingToSpawn;
+        _enemiesRemainingToSpawn = scaledEnemyCount;
+        _enemiesRemainingAlive = _enemiesRemainingToSpawn;
 
-        isWaveActive = true;
+        _isWaveActive = true;
 
         WaveStarted?.Invoke(currentWaveIndex);
         StartCoroutine(SpawnWaveEnemies(currentWave, scaledEnemyCount));
@@ -89,13 +89,13 @@ public class EnemyWaveManager : MonoBehaviour
             yield return new WaitForSeconds(wave.spawnInterval);
         }
 
-        isWaveActive = false;
+        _isWaveActive = false;
         StartCoroutine(WaitForNextWave());
     }
 
     private IEnumerator WaitForNextWave()
     {
-        while (enemiesRemainingAlive > 0)
+        while (_enemiesRemainingAlive > 0)
         {
             yield return null;
         }
@@ -107,6 +107,6 @@ public class EnemyWaveManager : MonoBehaviour
 
     public void EnemyDefeated()
     {
-        enemiesRemainingAlive--;
+        _enemiesRemainingAlive--;
     }
 }
