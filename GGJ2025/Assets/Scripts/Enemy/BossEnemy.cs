@@ -1,5 +1,6 @@
 using ObjectPoolings;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BossEnemy : BasicEnemy
 {
@@ -7,10 +8,21 @@ public class BossEnemy : BasicEnemy
     public float healthMult;
     public float speedMult;
 
+    public void InitEnemy(PrefabPool pool)
+    {
+        this.pool = pool;
+
+        Stats.Health *= healthMult;
+        Stats.MovementSpeed *= speedMult;
+
+        Stats.Health = Stats.MaxHealth;
+        agent.speed = Stats.MovementSpeed;
+    }
+
     private void Update()
     {
         EnemyPathFinding();
-        //TryAttack();
+        TryAttack();
     }
 
     // Boss Enemy only follow player
