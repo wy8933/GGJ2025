@@ -2,8 +2,9 @@ using System;
 using UnityEngine;
 public enum WeaponType
 {
-    MachineGun,
-    Shotgun
+    Scatter,
+    RapidFire,
+    ShotGun
 }
 
 [System.Serializable]

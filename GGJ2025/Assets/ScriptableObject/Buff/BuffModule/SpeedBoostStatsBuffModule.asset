@@ -15,7 +15,7 @@ MonoBehaviour:
   stats:
     MaxHealth: 0
     Health: 0
-    MovementSpeed: 10
+    MovementSpeed: 0
     RotationSpeed: 0
     SprintSpeed: 0
     Resistance: 0
@@ -23,8 +23,10 @@ MonoBehaviour:
     DamageReduction: 0
     BlockChance: 0
     SlowResistance: 0
+    SizeMultiplier: 0
+    HealthMultiplier: 0
     AtkMultiplier: 0
     DamageReductionMultiplier: 0
     ResistanceMultiplier: 0
-    SpeedMultiplier: 0
+    SpeedMultiplier: 0.2
     GoldDropMultiplier: 0

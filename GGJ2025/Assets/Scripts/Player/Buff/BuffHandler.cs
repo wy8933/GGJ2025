@@ -24,8 +24,8 @@ public class BuffHandler : MonoBehaviour
     }
 
 
-    public void AddBuff(BuffInfo buffInfo) {
-
+    public void AddBuff(BuffInfo buffInfo)
+    {
         // Check if player alreay have the buff
         BuffInfo findBuffInfo = FindBuff(buffInfo.buffData.id);
         if (findBuffInfo != null)

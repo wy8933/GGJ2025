@@ -25,9 +25,9 @@ public class PlayerController : MonoBehaviour
     public float currentBubble;
     public float bubbleHealthDeduct;
     public float bubbleGainAmount;
+    public float bubbleCost;
 
     [Header("Machine Gun")]
-    public float machineGunBubbleCost;
     public bool isShooting;
     public float shootCooldown;
     public float shootshootCooldownTimer;
@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         _playerRB = GetComponent<Rigidbody>();
         _playerRB.maxLinearVelocity = maxSpeed;
         HUDManager.Instance.SetMaxHealth(Stats.MaxHealth);
@@ -97,19 +98,26 @@ public class PlayerController : MonoBehaviour
     {
         switch (weaponType)
         {
-            case WeaponType.MachineGun:
-                if (currentBubble >= machineGunBubbleCost) {
+            case WeaponType.Scatter:
+                if (currentBubble >= bubbleCost) {
                     SpawnBullet(machineGunAngleOffset);
-                    ReduceBubble(machineGunBubbleCost);
+                    ReduceBubble(bubbleCost);
                 }
                 break;
-            case WeaponType.Shotgun:
+            case WeaponType.ShotGun:
                 if (currentBubble >= shotGunBubbleCost) {
                     for (int i = 0; i < bulletCount; i++)
                     {
                         SpawnBullet(shotGunAngleOffset);
                     }
                     ReduceBubble(shotGunBubbleCost);
+                }
+                break;
+            case WeaponType.RapidFire:
+                if (currentBubble >= bubbleCost)
+                {
+                    SpawnBullet(0);
+                    ReduceBubble(bubbleCost);
                 }
                 break;
         }
@@ -138,7 +146,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Stats.Health -= damage;
+        Stats.Health -= (damage * (1-Stats.BlockChance));
         HUDManager.Instance.SetHealth(Stats.Health);
 
         if (Stats.Health <= 0)
