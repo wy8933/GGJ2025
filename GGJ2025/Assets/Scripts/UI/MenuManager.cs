@@ -8,7 +8,6 @@ public class MenuManager : MonoBehaviour
 
     public void OnStartClicked() 
     {
-        Debug.Log("open");
         SceneManager.LoadScene(1);
     }
     public void OnSettingClicked()
@@ -35,7 +34,7 @@ public class MenuManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void OnMainMenuClicked() { 
+    public void OnMainMenuClicked() {
         SceneManager.LoadScene(0);
     }
 }

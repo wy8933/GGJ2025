@@ -31,9 +31,9 @@ public class PowerUpManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ShowPowerUpSelection();
+            GameManager.Instance.Pause();
         }
     }
 
@@ -90,15 +90,12 @@ public class PowerUpManager : MonoBehaviour
             switch (_chosenPowerUps[index].buffName) {
                 case "Rapid-Fire":
                     _player.GetComponent<PlayerController>().weaponType = WeaponType.RapidFire;
-                    Debug.Log("fire");
                     break;
                 case "Scatter":
                     _player.GetComponent<PlayerController>().weaponType = WeaponType.Scatter;
-                    Debug.Log("Scatter");
                     break;
                 case "ShotGun":
                     _player.GetComponent<PlayerController>().weaponType = WeaponType.ShotGun;
-                    Debug.Log("ShotGun");
                     break;
 
             } 

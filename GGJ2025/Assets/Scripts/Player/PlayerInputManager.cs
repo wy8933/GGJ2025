@@ -80,7 +80,7 @@ public class PlayerInputManager : MonoBehaviour
     }
 
     private void OnPausePerformed(InputAction.CallbackContext context) { 
-        GameManager.Instance.Pause();
+        //GameManager.Instance.Pause();
     }
 }
 

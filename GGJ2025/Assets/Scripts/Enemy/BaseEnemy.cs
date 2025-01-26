@@ -2,6 +2,7 @@ using ObjectPoolings;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Audio;
 using UnityEngine.Rendering.Universal;
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -12,6 +13,7 @@ public class BaseEnemy : MonoBehaviour
     public NavMeshAgent agent;
     public PrefabPool pool;
     public bool isReleased;
+    public AudioSource audioSource;
 
     private void Start()
     {
@@ -65,6 +67,7 @@ public class BaseEnemy : MonoBehaviour
     private void Die() 
     {
         if (!isReleased) {
+            audioSource.Play();
             isReleased = true;
             EnemyWaveManager.Instance.EnemyDefeated();
             pool.Release(gameObject);

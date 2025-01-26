@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         _playerRB = GetComponent<Rigidbody>();
         _playerRB.maxLinearVelocity = maxSpeed;
         HUDManager.Instance.SetMaxHealth(Stats.MaxHealth);
@@ -145,7 +146,7 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Stats.Health -= damage;
+        Stats.Health -= (damage * (1-Stats.BlockChance));
         HUDManager.Instance.SetHealth(Stats.Health);
 
         if (Stats.Health <= 0)

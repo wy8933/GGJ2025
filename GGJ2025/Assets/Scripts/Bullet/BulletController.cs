@@ -14,15 +14,23 @@ public class BulletController : MonoBehaviour
     private bool isReleased = false;
     public DamageType damageType;
     PrefabPool pool;
+    public AudioSource audioSource;
 
     private void Update()
     {
         lifeTimer -= Time.deltaTime;
 
-        if (lifeTimer < 0 &&!isReleased)
+        // Dumb way to fix a bug
+        if (lifeTimer < 0.3 && !isReleased) {
+            PopSound();
+            isReleased = true;
+        }
+
+        if (lifeTimer < 0)
         {
             animator.SetBool("IsExplode", true);
-            GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+            GetComponent<Rigidbody>().linearVelocity = Vector3.zero; 
+            isReleased = true;
         }
         CheckBubblePop();
     }
@@ -47,6 +55,7 @@ public class BulletController : MonoBehaviour
             if (!isReleased)
             {
                 animator.SetBool("IsExplode", true);
+                PopSound();
                 GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
             }
         }
@@ -55,6 +64,7 @@ public class BulletController : MonoBehaviour
             if (!isReleased)
             {
                 animator.SetBool("IsExplode", true);
+                PopSound();
                 GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
             }
         }
@@ -65,5 +75,11 @@ public class BulletController : MonoBehaviour
             pool.Release(gameObject);
             isReleased = true;
         }
+    }
+
+    public void PopSound() 
+    {
+        audioSource.Play();
+        audioSource.volume = SoundManager.Instance.SFXMult;
     }
 }
