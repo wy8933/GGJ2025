@@ -3086,15 +3086,54 @@ MonoBehaviour:
   - {fileID: 1564951267}
   - {fileID: 299664860}
   _firstTimePowerUps:
-  - {fileID: 11400000, guid: 9b7045236ca4a7146a1be7638881327d, type: 2}
-  - {fileID: 11400000, guid: 9b7045236ca4a7146a1be7638881327d, type: 2}
-  - {fileID: 11400000, guid: 9b7045236ca4a7146a1be7638881327d, type: 2}
+  - {fileID: 11400000, guid: 611965048bef2c448bb18fb03324d268, type: 2}
+  - {fileID: 11400000, guid: 9743d69a1d1fde04daf8f0b9b5653426, type: 2}
+  - {fileID: 11400000, guid: ec4c1e2f33451384dbf5a5475ec04b28, type: 2}
   _normalPowerUps:
+  - {fileID: 11400000, guid: 9b7045236ca4a7146a1be7638881327d, type: 2}
+  - {fileID: 11400000, guid: 9b7045236ca4a7146a1be7638881327d, type: 2}
+  - {fileID: 11400000, guid: 9b7045236ca4a7146a1be7638881327d, type: 2}
+  - {fileID: 11400000, guid: 9b7045236ca4a7146a1be7638881327d, type: 2}
+  - {fileID: 11400000, guid: 9b7045236ca4a7146a1be7638881327d, type: 2}
+  - {fileID: 11400000, guid: 9b7045236ca4a7146a1be7638881327d, type: 2}
+  - {fileID: 11400000, guid: 0995f97cea02c864aa429a51c00f2253, type: 2}
+  - {fileID: 11400000, guid: 0995f97cea02c864aa429a51c00f2253, type: 2}
+  - {fileID: 11400000, guid: 0995f97cea02c864aa429a51c00f2253, type: 2}
+  - {fileID: 11400000, guid: 0995f97cea02c864aa429a51c00f2253, type: 2}
+  - {fileID: 11400000, guid: 0995f97cea02c864aa429a51c00f2253, type: 2}
+  - {fileID: 11400000, guid: 0995f97cea02c864aa429a51c00f2253, type: 2}
+  - {fileID: 11400000, guid: 8bfd759ab0ebb89468287b27b6e95104, type: 2}
+  - {fileID: 11400000, guid: 8bfd759ab0ebb89468287b27b6e95104, type: 2}
+  - {fileID: 11400000, guid: 8bfd759ab0ebb89468287b27b6e95104, type: 2}
+  - {fileID: 11400000, guid: 8bfd759ab0ebb89468287b27b6e95104, type: 2}
+  - {fileID: 11400000, guid: 8bfd759ab0ebb89468287b27b6e95104, type: 2}
+  - {fileID: 11400000, guid: 8bfd759ab0ebb89468287b27b6e95104, type: 2}
+  - {fileID: 11400000, guid: 730f987e4d0145448ac9f7f140d3902c, type: 2}
+  - {fileID: 11400000, guid: 730f987e4d0145448ac9f7f140d3902c, type: 2}
+  - {fileID: 11400000, guid: 730f987e4d0145448ac9f7f140d3902c, type: 2}
+  - {fileID: 11400000, guid: 730f987e4d0145448ac9f7f140d3902c, type: 2}
+  - {fileID: 11400000, guid: 730f987e4d0145448ac9f7f140d3902c, type: 2}
+  - {fileID: 11400000, guid: 730f987e4d0145448ac9f7f140d3902c, type: 2}
+  - {fileID: 11400000, guid: 5cd121d1536b75347baea28ff9f426a3, type: 2}
+  - {fileID: 11400000, guid: 5cd121d1536b75347baea28ff9f426a3, type: 2}
+  - {fileID: 11400000, guid: 5cd121d1536b75347baea28ff9f426a3, type: 2}
+  - {fileID: 11400000, guid: 5cd121d1536b75347baea28ff9f426a3, type: 2}
+  - {fileID: 11400000, guid: 5cd121d1536b75347baea28ff9f426a3, type: 2}
+  - {fileID: 11400000, guid: 5cd121d1536b75347baea28ff9f426a3, type: 2}
+  - {fileID: 11400000, guid: a41f4aec715a32245b244af6eb38350e, type: 2}
+  - {fileID: 11400000, guid: a41f4aec715a32245b244af6eb38350e, type: 2}
+  - {fileID: 11400000, guid: a41f4aec715a32245b244af6eb38350e, type: 2}
+  - {fileID: 11400000, guid: a41f4aec715a32245b244af6eb38350e, type: 2}
+  - {fileID: 11400000, guid: a41f4aec715a32245b244af6eb38350e, type: 2}
+  - {fileID: 11400000, guid: a41f4aec715a32245b244af6eb38350e, type: 2}
   - {fileID: 11400000, guid: b5b2449c2ab6bc84185892234cf27737, type: 2}
   - {fileID: 11400000, guid: b5b2449c2ab6bc84185892234cf27737, type: 2}
   - {fileID: 11400000, guid: b5b2449c2ab6bc84185892234cf27737, type: 2}
   - {fileID: 11400000, guid: b5b2449c2ab6bc84185892234cf27737, type: 2}
   - {fileID: 11400000, guid: b5b2449c2ab6bc84185892234cf27737, type: 2}
+  - {fileID: 11400000, guid: 49637cc335cd9894bb9a3f529a9ff3a2, type: 2}
+  - {fileID: 11400000, guid: ea746ecbd1a83ae44af842855aadb4c1, type: 2}
+  - {fileID: 11400000, guid: ce037ff8fadc3da4c96690745cdd1057, type: 2}
   _buffHandler: {fileID: 1595879614}
 --- !u!1 &1509833901
 GameObject:
@@ -3386,7 +3425,7 @@ MonoBehaviour:
   currentBubble: 50
   bubbleHealthDeduct: 5
   bubbleGainAmount: 5
-  machineGunBubbleCost: 0.1
+  bubbleCost: 0
   isShooting: 0
   shootCooldown: 0.1
   shootshootCooldownTimer: 0

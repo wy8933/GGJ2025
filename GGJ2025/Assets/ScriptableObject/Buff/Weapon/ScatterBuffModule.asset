@@ -25,7 +25,7 @@ MonoBehaviour:
     SlowResistance: 0
     SizeMultiplier: 0
     HealthMultiplier: 0
-    AtkMultiplier: 0.5
+    AtkMultiplier: 1
     DamageReductionMultiplier: 0
     ResistanceMultiplier: 0
     SpeedMultiplier: 0

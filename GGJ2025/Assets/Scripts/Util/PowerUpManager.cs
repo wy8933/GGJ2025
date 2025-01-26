@@ -85,6 +85,24 @@ public class PowerUpManager : MonoBehaviour
 
         BuffData selectedBuff = _chosenPowerUps[index];
 
+        if (_isFirstTime) 
+        {
+            switch (_chosenPowerUps[index].buffName) {
+                case "Rapid-Fire":
+                    _player.GetComponent<PlayerController>().weaponType = WeaponType.RapidFire;
+                    Debug.Log("fire");
+                    break;
+                case "Scatter":
+                    _player.GetComponent<PlayerController>().weaponType = WeaponType.Scatter;
+                    Debug.Log("Scatter");
+                    break;
+                case "ShotGun":
+                    _player.GetComponent<PlayerController>().weaponType = WeaponType.ShotGun;
+                    Debug.Log("ShotGun");
+                    break;
+
+            } 
+        }
         BuffInfo buffInfo = new BuffInfo { buffData = selectedBuff, currentStack = 1 };
         buffInfo.target = _player;
         buffInfo.creator = _player;
