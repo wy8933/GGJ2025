@@ -4,6 +4,7 @@ using ObjectPoolings;
 [RequireComponent(typeof(Rigidbody))]
 public class BulletController : MonoBehaviour
 {
+    public Animator animator;
     public int minSpeed;
     public int maxSpeed; 
     public float baseDamage = 10f;
@@ -18,10 +19,11 @@ public class BulletController : MonoBehaviour
     {
         lifeTimer -= Time.deltaTime;
 
-        if (lifeTimer < 0 &&!isReleased) {
-            pool.Release(gameObject);
-            isReleased = true;
+        if (lifeTimer < 0 &&!isReleased)
+        {
+            animator.SetBool("IsExplode", true);
         }
+        CheckBubblePop();
     }
 
     public void InitBullet(PrefabPool pool, float damageMult) {
@@ -41,19 +43,24 @@ public class BulletController : MonoBehaviour
                 DamageInfo damageInfo = new DamageInfo(gameObject, other.gameObject, _damage, damageType);
                 DamageManager.Instance.ManageDamage(damageInfo);
             }
-
-            if (!isReleased) {
-                pool.Release(gameObject);
-                isReleased = true;
+            if (!isReleased)
+            {
+                animator.SetBool("IsExplode", true);
             }
         }
         else if (other.CompareTag("Wall")) 
         {
             if (!isReleased)
             {
-                pool.Release(gameObject);
-                isReleased = true;
+                animator.SetBool("IsExplode", true);
             }
+        }
+    }
+
+    public void CheckBubblePop() {
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("BubbleExplosion")) {
+            pool.Release(gameObject);
+            isReleased = true;
         }
     }
 }
