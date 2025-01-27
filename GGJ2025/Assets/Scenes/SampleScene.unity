@@ -3097,14 +3097,14 @@ MonoBehaviour:
     enemyTypes: 00000000
     isBossWave: 0
     bossType: 1
-    isBuffWave: 0
+    isBuffWave: 1
   - waveName: Wave 3
     baseEnemyCount: 12
     spawnInterval: 0.4
     enemyTypes: 00000000
     isBossWave: 0
     bossType: 1
-    isBuffWave: 0
+    isBuffWave: 1
   currentWaveIndex: 0
   enemyIncreaseFactor: 1.1
   timeBetweenWaves: 5
