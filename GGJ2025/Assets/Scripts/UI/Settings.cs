@@ -12,12 +12,18 @@ public class Settings : MonoBehaviour
         MusicSlider.value = SoundManager.Instance.MusicMult;
     }
 
+    /// <summary>
+    /// Change the SFX value
+    /// </summary>
     public void SFXOnValueChange()
     {
         SoundManager.Instance.SFXMult = SFXSlider.value;
         Debug.Log(SFXSlider.value);
     }
 
+    /// <summary>
+    /// Change the background music value
+    /// </summary>
     public void MusicOnValueChange()
     {
         SoundManager.Instance.MusicMult = MusicSlider.value;

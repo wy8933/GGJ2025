@@ -22,6 +22,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// toggle pause the game and shot pause menu when game is not over and it's not power up menu
+    /// </summary>
     public void Pause()
     {
         isPaused = !isPaused;
@@ -40,6 +43,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // Show game over menu and pause the game
     public void GameOver()
     {
         isGameOver = true;

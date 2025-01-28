@@ -7,6 +7,9 @@ public enum WeaponType
     ShotGun
 }
 
+/// <summary>
+/// Stats used for both player and enemy
+/// </summary>
 [System.Serializable]
 public struct Stats
 {

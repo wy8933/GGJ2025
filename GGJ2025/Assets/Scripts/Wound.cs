@@ -9,6 +9,10 @@ public class Wound : MonoBehaviour
         Instance = this;
     }
 
+    /// <summary>
+    /// Trigger game over if enemy enter the wound
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy") {

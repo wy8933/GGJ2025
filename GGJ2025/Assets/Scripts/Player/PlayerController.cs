@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1;
         _playerRB = GetComponent<Rigidbody>();
         _playerRB.maxLinearVelocity = maxSpeed;
+
+        // Init the HUD UI
         HUDManager.Instance.SetMaxHealth(Stats.MaxHealth);
         HUDManager.Instance.SetMaxBubble(maxBubble);
         HUDManager.Instance.SetHealth(Stats.Health);
@@ -57,6 +59,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        // Constantly shoot bullet by cooldown
         if (isShooting) 
         {
             shootshootCooldownTimer -= Time.deltaTime;
@@ -68,17 +71,24 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Move the player by add force in player's rigidbody towards the input direction
+    /// </summary>
     public void PlayerMovement() 
     {
         // Physics doesn't need delta time
         _playerRB.AddForce(new Vector3(moveDirection.x,0,moveDirection.y) * Stats.MovementSpeed);
     }
 
+    /// <summary>
+    /// Rotate the player towards the mouse position
+    /// </summary>
     public void PlayerRotation()
     {
         Ray ray = mainMamera.ScreenPointToRay(Input.mousePosition);
         Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
 
+        // Get the mouse position and rotate player
         if (groundPlane.Raycast(ray, out float distance))
         {
             Vector3 targetPosition = ray.GetPoint(distance);
@@ -94,6 +104,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Perform different bullet pattern based on the weapon type of player
+    /// </summary>
     public void Attack() 
     {
         switch (weaponType)
@@ -123,29 +136,46 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Create or get the bullet from object pool and set to firepoint transform with offsets, and init bullet
+    /// </summary>
+    /// <param name="offset">The offset range for bullet angle</param>
     public void SpawnBullet(int offset)
     {
+        // Calculate the bullet shoot angle based on random offset
         Vector3 currentRotation = playerModel.transform.eulerAngles;
         float randomOffset = Random(offset);
         currentRotation.y += randomOffset + 180;
         Quaternion rotation = Quaternion.Euler(currentRotation);
 
+        // Create or get the bullet from the object pool
         var (objectInstance, pool) = ObjectPooling.GetOrCreate(bulletPrefab, firepoint.position, rotation);
         var bulletController = objectInstance.GetComponent<BulletController>();
 
+        // Init bullet
         if (bulletController)
         {
             bulletController.InitBullet(pool, Stats.AtkMultiplier);
         }
     }
 
+    /// <summary>
+    /// Create random number from positive to negative
+    /// </summary>
+    /// <param name="num">The positive and negative range</param>
+    /// <returns>The random number</returns>
     private float Random(int num)
     { 
         return new System.Random().Next(-num,num) - new System.Random().Next(-num, num);
     }
 
+    /// <summary>
+    /// Take damage and trigger death when hp is lower than 0
+    /// </summary>
+    /// <param name="damage"></param>
     public void TakeDamage(float damage)
     {
+        // deal damage and update UI
         Stats.Health -= (damage * (1-Stats.BlockChance));
         HUDManager.Instance.SetHealth(Stats.Health);
 
@@ -155,11 +185,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Trigger gameover when player died
+    /// </summary>
     private void Die()
     {
         GameManager.Instance.GameOver();
     }
 
+    /// <summary>
+    /// Gain bubble ammo 
+    /// </summary>
+    /// <param name="amount">Amound of bubble ammo gain</param>
     public void GainBubble(float amount)
     {
         currentBubble += amount;
@@ -171,6 +208,10 @@ public class PlayerController : MonoBehaviour
         HUDManager.Instance.SetBubble(currentBubble);
     }
 
+    /// <summary>
+    /// Reduce bubble ammo
+    /// </summary>
+    /// <param name="amount">the amonud of bubble ammo reduced</param>
     public void ReduceBubble(float amount)
     {
         currentBubble -= amount;
@@ -183,6 +224,9 @@ public class PlayerController : MonoBehaviour
         HUDManager.Instance.SetBubble(currentBubble);
     }
 
+    /// <summary>
+    /// Gain bubble ammo and reduce health
+    /// </summary>
     public void WaterLogic() {
         TakeDamage(bubbleHealthDeduct);
         GainBubble(bubbleGainAmount);

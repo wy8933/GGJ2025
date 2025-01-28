@@ -37,6 +37,9 @@ public class PowerUpManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Show the selection of power up to the menu
+    /// </summary>
     public void ShowPowerUpSelection()
     {
         _chosenPowerUps.Clear();
@@ -47,8 +50,8 @@ public class PowerUpManager : MonoBehaviour
             return;
         }
 
+        // Choose 3 random power up from the list
         HashSet<int> selectedIndices = new HashSet<int>();
-
         while (selectedIndices.Count < _powerUpButtons.Count)
         {
             int randomIndex = Random.Range(0, powerUpPool.Count);
@@ -59,6 +62,7 @@ public class PowerUpManager : MonoBehaviour
             }
         }
 
+        // Add the info of the power up to the menu and add event listener
         for (int i = 0; i < _powerUpButtons.Count; i++)
         {
             BuffData buff = _chosenPowerUps[i];
@@ -72,11 +76,16 @@ public class PowerUpManager : MonoBehaviour
             _powerUpButtons[i].onClick.AddListener(() => ApplyPowerUp(index));
         }
 
+        // Show the menu
         _powerUpPanel.SetActive(true);
         GameManager.Instance.isPowerUp = true;
         GameManager.Instance.Pause();
     }
 
+    /// <summary>
+    /// Apply the choosen power up to player
+    /// </summary>
+    /// <param name="index">Which power up is it from the power up list</param>
     public void ApplyPowerUp(int index)
     {
         if (index < 0 || index >= _chosenPowerUps.Count)
@@ -86,6 +95,7 @@ public class PowerUpManager : MonoBehaviour
 
         BuffData selectedBuff = _chosenPowerUps[index];
 
+        // First power up will always be setting the weapon type player wants to use
         if (_isFirstTime) 
         {
             switch (_chosenPowerUps[index].buffName) {
@@ -101,13 +111,17 @@ public class PowerUpManager : MonoBehaviour
 
             } 
         }
+
+        // Get the info of the buff
         BuffInfo buffInfo = new BuffInfo { buffData = selectedBuff, currentStack = 1 };
         buffInfo.target = _player;
         buffInfo.creator = _player;
 
+        // Add buff to player's buff list
         _buffHandler.AddBuff(buffInfo);
         _isFirstTime = false;
 
+        // Exit power up menu
         _powerUpPanel.SetActive(false);
         GameManager.Instance.Pause();
         GameManager.Instance.isPowerUp = false;

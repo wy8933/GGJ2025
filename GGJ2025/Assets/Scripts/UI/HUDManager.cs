@@ -20,12 +20,21 @@ public class HUDManager : MonoBehaviour
         Instance = this;
     }
 
+    /// <summary>
+    /// Set the max value of health slider
+    /// </summary>
+    /// <param name="health">The new max health</param>
     public void SetMaxHealth(float health)
     {
         healthSlider.maxValue = health;
 
         healthGradient.Evaluate(1f);
     }
+
+    /// <summary>
+    /// Set the current value of health slider and change the fill color of the slider
+    /// </summary>
+    /// <param name="health">The current health</param>
     public void SetHealth(float health)
     {
         healthSlider.value = health;
@@ -33,12 +42,23 @@ public class HUDManager : MonoBehaviour
         healthFill.color = healthGradient.Evaluate(healthSlider.normalizedValue);
     }
 
+
+    /// <summary>
+    /// Set the max value of bubble slider
+    /// </summary>
+    /// <param name="value">The new max bubble</param>
     public void SetMaxBubble(float value)
     {
         bubbleSlider.maxValue = value;
 
         bubbleGradient.Evaluate(1f);
     }
+
+
+    /// <summary>
+    /// Set the current value of bubble slider, and change the fill color of the slider
+    /// </summary>
+    /// <param name="value">The curret bubble value</param>
     public void SetBubble(float value)
     {
         bubbleSlider.value = value;

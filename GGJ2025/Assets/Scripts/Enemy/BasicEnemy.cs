@@ -24,6 +24,9 @@ public class BasicEnemy : BaseEnemy
         TryAttack();
     }
 
+    /// <summary>
+    /// Check if player is in range and can be attacked
+    /// </summary>
     protected void TryAttack()
     {
         if (player == null) return;
@@ -36,11 +39,15 @@ public class BasicEnemy : BaseEnemy
         }
     }
 
+    /// <summary>
+    /// Play the attack animation and attack the player
+    /// </summary>
     private void Attack()
     {
         animator.SetBool("IsAttack", true);
         canAttack = false;
 
+        // Check if player exist and deal damage to player
         if (player.TryGetComponent(out PlayerController playerController))
         {
             DamageInfo damageInfo = new DamageInfo(gameObject, player.gameObject, attackDamage * Stats.AtkMultiplier, attackDamageType);
@@ -50,6 +57,9 @@ public class BasicEnemy : BaseEnemy
         Invoke(nameof(ResetAttack), attackCooldown);
     }
 
+    /// <summary>
+    /// Reset attack state
+    /// </summary>
     private void ResetAttack()
     {
         canAttack = true;

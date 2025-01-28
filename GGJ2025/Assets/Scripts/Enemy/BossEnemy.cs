@@ -2,12 +2,19 @@ using ObjectPoolings;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+/// Cut feature due to time
+/// </summary>
 public class BossEnemy : BasicEnemy
 {
     [Header("Boss Stats Mult")]
     public float healthMult;
     public float speedMult;
 
+    /// <summary>
+    /// Init the enemy behavior to make sure it will function correctly whenncreate and get from an object pool
+    /// </summary>
+    /// <param name="pool">The pool it is from</param>
     public void InitEnemy(PrefabPool pool)
     {
         this.pool = pool;
@@ -25,7 +32,9 @@ public class BossEnemy : BasicEnemy
         TryAttack();
     }
 
-    // Boss Enemy only follow player
+    /// <summary>
+    /// Boss Enemy only follow player
+    /// </summary>
     protected override void EnemyPathFinding() 
     {
         if (agent != null)

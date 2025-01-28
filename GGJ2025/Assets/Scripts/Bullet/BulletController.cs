@@ -11,21 +11,24 @@ public class BulletController : MonoBehaviour
     private float _damage;
     public float lifeTime;
     public float lifeTimer;
-    private bool isReleased = false;
     public DamageType damageType;
-    PrefabPool pool;
     public AudioSource audioSource;
+
+    [Tooltip("Use to make sure the varibale doesn't get released multiple time")]
+    private bool isReleased = false;
+    private PrefabPool pool;
 
     private void Update()
     {
         lifeTimer -= Time.deltaTime;
 
-        // Dumb way to fix a bug
+        // Make pop sound before the bubble pop to make sure the sound will correctly finished
         if (lifeTimer < 0.3 && !isReleased) {
             PopSound();
             isReleased = true;
         }
 
+        // Play the pop animatino and get it ready for release
         if (lifeTimer < 0)
         {
             animator.SetBool("IsExplode", true);
@@ -35,6 +38,11 @@ public class BulletController : MonoBehaviour
         CheckBubblePop();
     }
 
+    /// <summary>
+    /// Init the bullet when it's created or got from the object pool, to make sure the bullet will function correctly
+    /// </summary>
+    /// <param name="pool">The object pool bullet is in, for release bullet in the future</param>
+    /// <param name="damageMult">The multiply of damage value from bullet source</param>
     public void InitBullet(PrefabPool pool, float damageMult) {
         _damage = baseDamage * damageMult;
         lifeTimer = lifeTime;
@@ -43,8 +51,13 @@ public class BulletController : MonoBehaviour
         GetComponent<Rigidbody>().linearVelocity = transform.forward * new System.Random().Next(minSpeed, maxSpeed);
     }
 
+    /// <summary>
+    /// Check collider's tag, and trigger different behavior 
+    /// </summary>
+    /// <param name="other">The object collider with bullet</param>
     private void OnTriggerEnter(Collider other)
     {
+        // Damage enemy and release the bullet when the collider is enemy
         if (other.CompareTag("Enemy"))
         {
             if (other.TryGetComponent(out BaseEnemy enemy))
@@ -58,7 +71,7 @@ public class BulletController : MonoBehaviour
                 PopSound();
                 GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
             }
-        }
+        } // Realse bullet when collider is wall
         else if (other.CompareTag("Wall")) 
         {
             if (!isReleased)
@@ -70,6 +83,9 @@ public class BulletController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check if the current animation is bubble explosion and relased the bullet when the animation is finished
+    /// </summary>
     public void CheckBubblePop() {
         if (animator.GetCurrentAnimatorStateInfo(0).IsName("BubbleExplosion")&&animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= animator.GetCurrentAnimatorStateInfo(0).length) {
             pool.Release(gameObject);
@@ -77,6 +93,7 @@ public class BulletController : MonoBehaviour
         }
     }
 
+    // Play the bubble explode sound
     public void PopSound() 
     {
         audioSource.Play();

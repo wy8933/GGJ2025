@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+
 [System.Serializable]
 public class Wave
 {
@@ -49,17 +50,28 @@ public class EnemyWaveManager : MonoBehaviour
         StartCoroutine(StartWaveCoroutine());
     }
 
+    /// <summary>
+    /// Pause for seconds and start the wave
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator StartWaveCoroutine()
     {
         yield return new WaitForSeconds(3f);
         StartNextWave();
     }
 
+    /// <summary>
+    /// Start the new wave of enemies
+    /// </summary>
     private void StartNextWave()
     {
+        // Loop the enemy wave and increase it's difficulty
         if (currentWaveIndex >= waves.Count)
         {
+            // Reset the wave index
             currentWaveIndex = 0;
+
+            // So there is at lease one number of enemy increased
             for (int i = 0; i < waves.Count; i++)
             {
                 waves[i].baseEnemyCount += 1;
@@ -68,16 +80,24 @@ public class EnemyWaveManager : MonoBehaviour
 
         Wave currentWave = waves[currentWaveIndex];
 
+        // Scale the number of enemy
         int scaledEnemyCount = Mathf.RoundToInt(currentWave.baseEnemyCount * Mathf.Pow(enemyIncreaseFactor, currentWaveIndex));
         _enemiesRemainingToSpawn = scaledEnemyCount;
         _enemiesRemainingAlive = _enemiesRemainingToSpawn;
 
         _isWaveActive = true;
 
+        // Start spawning enemies
         WaveStarted?.Invoke(currentWaveIndex);
         StartCoroutine(SpawnWaveEnemies(currentWave, scaledEnemyCount));
     }
 
+    /// <summary>
+    /// Spawn the enemy in random enemy spawner
+    /// </summary>
+    /// <param name="wave">The current wave number</param>
+    /// <param name="enemyCount">The number of enemy to spawn</param>
+    /// <returns></returns>
     private IEnumerator SpawnWaveEnemies(Wave wave, int enemyCount)
     {
         for (int i = 0; i < enemyCount; i++)
@@ -99,6 +119,10 @@ public class EnemyWaveManager : MonoBehaviour
         StartCoroutine(WaitForNextWave());
     }
 
+    /// <summary>
+    /// Check if it's time for the next wave of enemy
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator WaitForNextWave()
     {
         while (_enemiesRemainingAlive > 0)
@@ -109,11 +133,15 @@ public class EnemyWaveManager : MonoBehaviour
         if (waves[currentWaveIndex].isBuffWave) {
             powerUpManager.ShowPowerUpSelection();
         }
+
         yield return new WaitForSeconds(timeBetweenWaves);
         currentWaveIndex++;
         StartNextWave();
     }
 
+    /// <summary>
+    /// Decrease the remaining alive enemy count
+    /// </summary>
     public void EnemyDefeated()
     {
         _enemiesRemainingAlive--;

@@ -25,12 +25,18 @@ public class BaseEnemy : MonoBehaviour
     {
         EnemyPathFinding();
 
-        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|ArmatureAction 0") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= animator.GetCurrentAnimatorStateInfo(0).length)
+        // Check if the animation is finished and set animation back to walk
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Armature|ArmatureAction 0") && 
+            animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= animator.GetCurrentAnimatorStateInfo(0).length)
         {
             animator.SetBool("IsAttack", false);
         }
     }
 
+    /// <summary>
+    /// Init the enemy behavior to make sure it will function correctly whenncreate and get from an object pool
+    /// </summary>
+    /// <param name="pool">The pool it is from</param>
     public void InitEnemy(PrefabPool pool) 
     {
         Stats.Health = Stats.MaxHealth;
@@ -41,6 +47,9 @@ public class BaseEnemy : MonoBehaviour
         ApplyScaling(EnemyWaveManager.Instance.enemyIncreaseFactor, EnemyWaveManager.Instance.currentWaveIndex);
     }
 
+    /// <summary>
+    /// Path finding towards player or the wound depend on which of the two is closer
+    /// </summary>
     protected virtual void EnemyPathFinding()
     {
         Vector3 woundPosition = Wound.Instance.transform.position;
@@ -59,9 +68,12 @@ public class BaseEnemy : MonoBehaviour
         }
 
         agent.SetDestination(targetPosition);
-        
     }
 
+    /// <summary>
+    /// Deal damage to enemy and trigger die method when hp is below 0
+    /// </summary>
+    /// <param name="damage"></param>
     public void TakeDamage(float damage) {
         Stats.Health -= damage;
 
@@ -70,6 +82,9 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Release the enemy in the object pool and notify enemy wave manager that one enemy is defeated
+    /// </summary>
     private void Die() 
     {
         if (!isReleased) {
@@ -80,10 +95,18 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Play enemy death animation(Cut off feature)
+    /// </summary>
     private void BubbleDeathAnimation() { 
         
     }
 
+    /// <summary>
+    /// Apply enemy scaling to enemy's stats based on the wave number and enemy increase factor
+    /// </summary>
+    /// <param name="enemyIncreaseFactor">How much enemy stats will multiply by per wave</param>
+    /// <param name="waveNumber">The current number of wave</param>
     public void ApplyScaling(float enemyIncreaseFactor, int waveNumber)
     {
         float scalingFactor = Mathf.Pow(enemyIncreaseFactor, waveNumber);
@@ -98,8 +121,6 @@ public class BaseEnemy : MonoBehaviour
         Stats.DamageReduction *= scalingFactor * Stats.DamageReductionMultiplier;
         Stats.BlockChance *= scalingFactor;
         Stats.SlowResistance *= scalingFactor;
-
-        Debug.Log($"[Scaling Applied] Wave: {waveNumber}, Factor: {scalingFactor}");
     }
 
 }
